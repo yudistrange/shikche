@@ -39,7 +39,6 @@ defmodule ShikcheWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import ShikcheWeb.ErrorHelpers
       import ShikcheWeb.Gettext
       alias ShikcheWeb.Router.Helpers, as: Routes
     end
