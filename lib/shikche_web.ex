@@ -22,7 +22,6 @@ defmodule ShikcheWeb do
       use Phoenix.Controller, namespace: ShikcheWeb
 
       import Plug.Conn
-      import ShikcheWeb.Gettext
       alias ShikcheWeb.Router.Helpers, as: Routes
     end
   end
@@ -39,7 +38,6 @@ defmodule ShikcheWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import ShikcheWeb.Gettext
       alias ShikcheWeb.Router.Helpers, as: Routes
     end
   end
@@ -55,7 +53,6 @@ defmodule ShikcheWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import ShikcheWeb.Gettext
     end
   end
 
