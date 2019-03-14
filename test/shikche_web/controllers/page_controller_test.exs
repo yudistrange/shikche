@@ -3,6 +3,7 @@ defmodule ShikcheWeb.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get(conn, "/")
-    assert html_response(conn, 200) =~ "Welcome to Phoenix!"
+    assert 200 == Map.get(conn, :status)
+    assert html_response(conn, 200) =~ "elm-main"
   end
 end

@@ -44,3 +44,5 @@ npm-debug.log
 .tool-versions
 shikche.iml
 .idea/
+
+assets/elm-stuff/
