@@ -36,5 +36,5 @@ defmodule Shikche.Models.Languages do
   def delete(name), do: name |> get() |> delete()
 
   defp lowecase_name(%{} = attributes),
-    do: attributes |> Map.update(:name, nil, &(String.downcase &1))
+    do: attributes |> Map.update(:name, nil, &String.downcase(&1))
 end

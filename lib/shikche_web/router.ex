@@ -24,5 +24,8 @@ defmodule ShikcheWeb.Router do
     pipe_through :api
 
     get "/languages/:name", LanguageController, :get
+
+    post "/translations", TranslationController, :insert
+    get "/translations/:word", TranslationController, :get
   end
 end
