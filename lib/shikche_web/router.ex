@@ -20,7 +20,9 @@ defmodule ShikcheWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", ShikcheWeb do
-  #   pipe_through :api
-  # end
+  scope "/api/v1", ShikcheWeb do
+    pipe_through :api
+
+    get "/languages/:name", LanguageController, :get
+  end
 end
