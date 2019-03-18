@@ -12,8 +12,9 @@ defmodule ShikcheWeb.LanguageController do
     case Languages.get(name) do
       %Languages{} = language ->
         json(conn, language)
+
       _ ->
         conn |> put_status(404) |> json(%{reason: "Language not found"})
-     end
+    end
   end
 end
