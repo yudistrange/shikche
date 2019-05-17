@@ -46,3 +46,6 @@ shikche.iml
 .idea/
 
 assets/elm-stuff/
+
+# docker compose mount dir
+/dev
