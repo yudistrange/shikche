@@ -11,3 +11,14 @@ services:
       POSTGRES_DB: "shikche_dev"
     volumes:
       - ./dev/pg/data:/var/lib/postgresql/data:rw
+
+  test_db:
+    image: postgres:11-alpine
+    ports:
+      - 47100:5432
+    environment:
+      POSTGRES_USER: "shikche"
+      POSTGRES_PASSWORD: "test"
+      POSTGRES_DB: "shikche_test"
+    volumes:
+      - ./dev/pg_test/data:/var/lib/postgresql/data:rw

@@ -11,8 +11,9 @@ config :logger, level: :warn
 
 # Configure your database
 config :shikche, Shikche.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "shikche",
+  password: "test",
   database: "shikche_test",
   hostname: "localhost",
+  port: 47100,
   pool: Ecto.Adapters.SQL.Sandbox
