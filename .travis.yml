@@ -1,6 +1,12 @@
+services:
+  - postgresql
+
 language: elixir
+
 elixir:
   - '1.8.1'
+
 otp_release:
   - '21.2'
-script: mix test
+
+script: MIX_ENV=ci mix test
