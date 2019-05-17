@@ -68,8 +68,9 @@ config :phoenix, :plug_init_mode, :runtime
 
 # Configure your database
 config :shikche, Shikche.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "shikche",
+  password: "dev",
   database: "shikche_dev",
   hostname: "localhost",
+  port: 47000,
   pool_size: 10
