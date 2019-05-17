@@ -1,0 +1,13 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+services:
+  dev_db:
+    image: postgres:11-alpine
+    ports:
+      - 47000:5432
+    environment:
+      POSTGRES_USER: "shikche"
+      POSTGRES_PASSWORD: "dev"
+      POSTGRES_DB: "shikche_dev"
+    volumes:
+      - ./dev/pg/data:/var/lib/postgresql/data:rw
