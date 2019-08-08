@@ -17,6 +17,7 @@ defmodule ShikcheWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/*path", PageController, :not_found
   end
 
   # Other scopes may use custom stacks.
@@ -27,5 +28,6 @@ defmodule ShikcheWeb.Router do
 
     post "/translations", TranslationController, :insert
     get "/translations/:word", TranslationController, :get
+    get "/*path", PageController, :not_found
   end
 end
