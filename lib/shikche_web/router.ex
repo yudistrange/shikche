@@ -13,13 +13,6 @@ defmodule ShikcheWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", ShikcheWeb do
-    pipe_through :browser
-
-    get "/", PageController, :index
-    get "/*path", PageController, :not_found
-  end
-
   # Other scopes may use custom stacks.
   scope "/api/v1", ShikcheWeb do
     pipe_through :api
@@ -28,6 +21,13 @@ defmodule ShikcheWeb.Router do
 
     post "/translations", TranslationController, :insert
     get "/translations/:word", TranslationController, :get
+    get "/*path", PageController, :not_found
+  end
+
+  scope "/", ShikcheWeb do
+    pipe_through :browser
+
+    get "/", PageController, :index
     get "/*path", PageController, :not_found
   end
 end
