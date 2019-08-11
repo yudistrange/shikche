@@ -2,7 +2,7 @@ defmodule ShikcheWeb.TranslationController do
   @moduledoc false
 
   use ShikcheWeb, :controller
-  import Logger
+  require Logger
 
   alias Shikche.Models.Translations
 
