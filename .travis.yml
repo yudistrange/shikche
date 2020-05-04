@@ -9,4 +9,4 @@ elixir:
 otp_release:
   - '21.2'
 
-script: make ci
+script: make ci-tests
