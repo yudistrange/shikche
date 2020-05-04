@@ -13,5 +13,5 @@ tests:
 
 ci:
 	echo "Running tests on CI"
-	cd assets && yarn ci && cd ../ && MIX_ENV=ci mix test
+	cd assets && yarn install && yarn ci && cd ../ && MIX_ENV=ci mix test
 
