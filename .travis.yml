@@ -9,4 +9,4 @@ elixir:
 otp_release:
   - '21.2'
 
-script: MIX_ENV=ci mix test
+script: make ci-tests
