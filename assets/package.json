@@ -1,0 +1,7 @@
+{
+  "name": "assets",
+  "version": "1.0.0",
+  "description": "Frontend assets for the shikche app",
+  "main": "index.js",
+  "license": "MIT"
+}
