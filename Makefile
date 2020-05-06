@@ -13,6 +13,7 @@ ci-tests:
 deploy:
 	echo "Building the assets"
 	cd assets && yarn run deploy
+	MIX_ENV=prod mix ecto.migrate
 	MIX_ENV=prod mix phx.server
 
 
