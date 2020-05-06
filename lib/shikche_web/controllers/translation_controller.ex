@@ -13,7 +13,7 @@ defmodule ShikcheWeb.TranslationController do
   def get(conn, %{"word" => word}) do
     case Translations.get(word) do
       %Translations{} = translation ->
-        json(conn, translation)
+        json(conn, Map.take(translation, [:id, :word, :translation, :tags]))
 
       _ ->
         conn |> put_status(404) |> json(%{reason: "Translation not found"})
