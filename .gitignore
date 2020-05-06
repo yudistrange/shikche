@@ -49,3 +49,5 @@ assets/elm-stuff/
 
 # docker compose mount dir
 /dev
+
+/.elixir_ls
