@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'milligram';
 
 ReactDOM.render(
   <React.StrictMode>

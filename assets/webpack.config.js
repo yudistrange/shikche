@@ -58,7 +58,7 @@ module.exports = {
   },
 
   plugins: [
-    new MiniCssExtractPlugin({ filename: "../styles/app.css" }),
+    new MiniCssExtractPlugin({ filename: "../css/app.css" }),
     new CopyWebpackPlugin([{ from: "static/**/*", to: "../../../priv/" }]),
   ],
 };
