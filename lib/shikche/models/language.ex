@@ -1,6 +1,6 @@
-defmodule Shikche.Models.Languages do
+defmodule Shikche.Models.Language do
   @moduledoc """
-  This module defines the schema for the Languages model and the API functions around it
+  This module defines the schema for the Language model and the API functions around it
   """
 
   use Ecto.Schema
@@ -8,14 +8,14 @@ defmodule Shikche.Models.Languages do
   import Ecto.Changeset
 
   alias Shikche.Repo
-  alias Shikche.Models.Languages
+  alias Shikche.Models.Language
 
   schema "languages" do
     field :name, :string, null: false
     timestamps(type: :utc_datetime)
   end
 
-  defp changeset(%Languages{} = language, attributes \\ %{}) do
+  defp changeset(%Language{} = language, attributes \\ %{}) do
     language
     |> cast(lowecase_name(attributes), [:name])
     |> validate_required([:name])
@@ -23,16 +23,16 @@ defmodule Shikche.Models.Languages do
   end
 
   def list(),
-    do: Repo.all(Languages)
+    do: Repo.all(Language)
 
   def get(name),
-    do: Repo.get_by(Languages, name: name)
+    do: Repo.get_by(Language, name: name)
 
   def insert(%{} = language_params),
-    do: changeset(%Languages{}, language_params) |> Repo.insert()
+    do: changeset(%Language{}, language_params) |> Repo.insert()
 
   def delete(nil), do: nil
-  def delete(%Languages{} = language), do: Repo.delete(language)
+  def delete(%Language{} = language), do: Repo.delete(language)
   def delete(name), do: name |> get() |> delete()
 
   defp lowecase_name(%{} = attributes),

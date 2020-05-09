@@ -4,15 +4,15 @@ defmodule ShikcheWeb.TranslationController do
   use ShikcheWeb, :controller
   require Logger
 
-  alias Shikche.Models.Translations
+  alias Shikche.Models.Translation
 
   def list(conn, _params) do
-    json(conn, Translations.list())
+    json(conn, Translation.list())
   end
 
   def get(conn, %{"word" => word}) do
-    case Translations.get(word) do
-      %Translations{} = translation ->
+    case Translation.get(word) do
+      %Translation{} = translation ->
         json(conn, Map.take(translation, [:id, :word, :translation, :tags]))
 
       _ ->
@@ -21,7 +21,7 @@ defmodule ShikcheWeb.TranslationController do
   end
 
   def insert(conn, params) do
-    case Translations.insert(params) do
+    case Translation.insert(params) do
       {:ok, translation} ->
         Logger.info("Added translation for #{translation.word}")
         json(conn, %{message: "Translation added"})

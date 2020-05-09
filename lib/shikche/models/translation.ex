@@ -1,6 +1,6 @@
-defmodule Shikche.Models.Translations do
+defmodule Shikche.Models.Translation do
   @moduledoc """
-  This module defines the schema for the Translations model and the API functions around it
+  This module defines the schema for the Translation model and the API functions around it
   """
 
   use Ecto.Schema
@@ -8,7 +8,7 @@ defmodule Shikche.Models.Translations do
   import Ecto.Changeset
 
   alias Shikche.Repo
-  alias Shikche.Models.Translations
+  alias Shikche.Models.Translation
 
   schema "translations" do
     field :word, :string, primary_key: true
@@ -19,7 +19,7 @@ defmodule Shikche.Models.Translations do
     timestamps(type: :utc_datetime)
   end
 
-  defp changeset(%Translations{} = translation, attributes) do
+  defp changeset(%Translation{} = translation, attributes) do
     translation
     |> cast(attributes, [:word, :phonetic_translation, :translation, :tags])
     |> validate_required([:word, :phonetic_translation, :translation, :tags])
@@ -27,15 +27,15 @@ defmodule Shikche.Models.Translations do
   end
 
   def list(),
-    do: Repo.all(Translations)
+    do: Repo.all(Translation)
 
   def get(word),
-    do: Repo.get_by(Translations, word: word)
+    do: Repo.get_by(Translation, word: word)
 
   def insert(%{} = translation_params),
-    do: changeset(%Translations{}, translation_params) |> Repo.insert()
+    do: changeset(%Translation{}, translation_params) |> Repo.insert()
 
   def delete(nil), do: nil
-  def delete(%Translations{} = translation), do: Repo.delete(translation)
+  def delete(%Translation{} = translation), do: Repo.delete(translation)
   def delete(word), do: word |> get() |> delete()
 end
