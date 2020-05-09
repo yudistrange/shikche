@@ -8,14 +8,17 @@ defmodule Shikche.Models.Language do
   import Ecto.Changeset
 
   alias Shikche.Repo
-  alias Shikche.Models.Language
+
+  alias Shikche.Models.{Language, Translation}
 
   schema "languages" do
     field :name, :string, null: false
+    has_many :translation, Translation
+
     timestamps(type: :utc_datetime)
   end
 
-  defp changeset(%Language{} = language, attributes \\ %{}) do
+  defp changeset(%Language{} = language, attributes) do
     language
     |> cast(lowecase_name(attributes), [:name])
     |> validate_required([:name])

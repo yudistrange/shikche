@@ -2,6 +2,7 @@ defmodule ShikcheWeb.TranslationControllerTest do
   @moduledoc false
 
   use ShikcheWeb.ConnCase
+  import Shikche.Factory
 
   test "Should return 404 for non-existent translation", %{conn: conn} do
     conn = get(conn, "/api/v1/translations/no-name")
@@ -10,13 +11,16 @@ defmodule ShikcheWeb.TranslationControllerTest do
   end
 
   test "Should add a translation", %{conn: conn} do
+    lang = insert(:languages)
+
     conn =
       post(conn, "/api/v1/translations", %{
         word: "word",
-        phonetic_translation: "word",
         translation: "word",
-        langugage_id: 1,
-        tags: ["noun"]
+        language_id: Map.get(lang, :id),
+        metadata: %{},
+        something: 5,
+        else: 5
       })
 
     assert 200 == Map.get(conn, :status)
@@ -24,12 +28,13 @@ defmodule ShikcheWeb.TranslationControllerTest do
   end
 
   test "Should fail on adding the same translation again", %{conn: conn} do
+    lang = insert(:languages)
+
     word = %{
       word: "word",
-      phonetic_translation: "word",
       translation: "word",
-      langugage_id: 1,
-      tags: ["noun"]
+      language_id: Map.get(lang, :id),
+      metadata: %{type: "noun"}
     }
 
     conn = post(conn, "/api/v1/translations", word)

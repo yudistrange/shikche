@@ -12,18 +12,19 @@ defmodule Shikche.Models.Translation do
 
   schema "translations" do
     field :word, :string, primary_key: true
-    field :phonetic_translation, :string, null: false
     field :translation, :string
-    field :tags, {:array, :string}
+    field :metadata, :map
+    field :language_id, :integer, null: false
 
     timestamps(type: :utc_datetime)
   end
 
   defp changeset(%Translation{} = translation, attributes) do
     translation
-    |> cast(attributes, [:word, :phonetic_translation, :translation, :tags])
-    |> validate_required([:word, :phonetic_translation, :translation, :tags])
+    |> cast(attributes, [:word, :metadata, :translation, :language_id])
+    |> validate_required([:word, :metadata, :translation])
     |> unique_constraint(:word)
+    |> foreign_key_constraint(:language_id)
   end
 
   def list(),
