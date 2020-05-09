@@ -38,7 +38,6 @@ export class Search extends React.Component<{}, SearchState> {
         {this.state.result.translation !== '' && this.state.result.word !== '' &&
           <Word translation={this.state.result.translation} word={this.state.result.word} />
         }
-        <Word translation="trans" word="word" />
       </>
     )
   }
