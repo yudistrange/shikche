@@ -12,7 +12,7 @@ defmodule Shikche.Models.Translation do
 
   schema "translations" do
     field :word, :string, primary_key: true
-    field :translation, :string
+    field :translation, :string, null: false
     field :metadata, :map
     field :language_id, :integer, null: false
 
