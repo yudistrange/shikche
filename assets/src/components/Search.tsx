@@ -4,13 +4,13 @@ import {searchBackend} from '../api';
 
 interface SearchState {
   text: string,
-  result: {} | { translation: string, word: string },
+  result: { translation: string, word: string },
 }
 
 export class Search extends React.Component<{}, SearchState> {
   state = {
     text: '',
-    result: {},
+    result: {translation: '', word: ''},
   }
 
   handleSearchInput(e: React.ChangeEvent<HTMLInputElement>) {
@@ -35,7 +35,7 @@ export class Search extends React.Component<{}, SearchState> {
           <input className="column column-10 column-offset-10" type="button" onClick={(e) => this.handleSearch()} value="Search" />
           <br />
         </div>
-        {this.state.result.translation !== null && this.state.result.word != null &&
+        {this.state.result.translation !== '' && this.state.result.word !== '' &&
           <Word translation={this.state.result.translation} word={this.state.result.word} />
         }
         <Word translation="trans" word="word" />
