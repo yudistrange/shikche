@@ -35,7 +35,7 @@ export class Search extends React.Component<{}, SearchState> {
           <input className="column column-10 column-offset-10" type="button" onClick={(e) => this.handleSearch()} value="Search" />
           <br />
         </div>
-        {this.state.result.translation !== '' && this.state.result.word !== '' &&
+        {this.state.result.translation && this.state.result.word &&
           <Word translation={this.state.result.translation} word={this.state.result.word} />
         }
       </>
