@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'milligram';
+import {App} from './components/App'
 
 ReactDOM.render(
   <React.StrictMode>
-    <div>Hello world!</div>
+    <App/>
   </React.StrictMode>,
   document.getElementById('root')
 );

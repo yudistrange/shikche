@@ -2,15 +2,15 @@ defmodule ShikcheWeb.LanguageController do
   @moduledoc false
 
   use ShikcheWeb, :controller
-  alias Shikche.Models.Languages
+  alias Shikche.Models.Language
 
   def list(conn, _params) do
-    json(conn, Languages.list())
+    json(conn, Language.list())
   end
 
   def get(conn, %{"name" => name}) do
-    case Languages.get(name) do
-      %Languages{} = language ->
+    case Language.get(name) do
+      %Language{} = language ->
         json(conn, Map.take(language, [:id, :name]))
 
       _ ->

@@ -1,0 +1,10 @@
+.word-table-container {
+  padding: 4em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.word-table {
+  width: 95%;
+}
