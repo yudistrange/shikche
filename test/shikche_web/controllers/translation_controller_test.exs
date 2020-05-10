@@ -10,6 +10,7 @@ defmodule ShikcheWeb.TranslationControllerTest do
     assert "{\"reason\":\"Translation not found\"}" == Map.get(conn, :resp_body)
   end
 
+  @tag :skip
   test "Should add a translation", %{conn: conn} do
     lang = insert(:languages)
 
@@ -27,6 +28,7 @@ defmodule ShikcheWeb.TranslationControllerTest do
     assert "{\"message\":\"Translation added\"}" == Map.get(conn, :resp_body)
   end
 
+  @tag :skip
   test "Should fail on adding the same translation again", %{conn: conn} do
     lang = insert(:languages)
 

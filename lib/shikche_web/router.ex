@@ -19,7 +19,7 @@ defmodule ShikcheWeb.Router do
 
     get "/languages/:name", LanguageController, :get
 
-    post "/translations", TranslationController, :insert
+    # post "/translations", TranslationController, :insert
     get "/translations/:word", TranslationController, :get
     get "/*path", PageController, :not_found
   end
