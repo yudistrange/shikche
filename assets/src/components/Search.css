@@ -1,0 +1,32 @@
+@media all and (max-width: 36em) and (min-width: 0em) {
+  .search-component {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+  }
+
+  .search-bar {
+    max-width: 100%;
+  }
+
+  .search-button {
+    width: 12em;
+    align-self: center;
+  }
+}
+
+@media all and (min-width: 37em) {
+  .search-component {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+  }
+
+  .search-bar {
+    max-width: 60%;
+  }
+
+  .search-button {
+    width: 12em;
+  }
+}

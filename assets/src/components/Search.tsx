@@ -1,6 +1,7 @@
 import React from 'react';
 import {Word} from './Word';
 import {searchBackend} from '../api';
+import './Search.css'
 
 interface SearchState {
   text: string,
@@ -30,10 +31,9 @@ export class Search extends React.Component<{}, SearchState> {
   render() {
     return (
       <>
-        <div className="row">
-          <input className="column column-50 column-offset-20" type="text" placeholder="word.." onChange={this.handleSearchInput.bind(this)} />
-          <input className="column column-10 column-offset-10" type="button" onClick={(e) => this.handleSearch()} value="Search" />
-          <br />
+        <div className="search-component row">
+          <input className="search-bar" type="text" placeholder="word.." onChange={this.handleSearchInput.bind(this)} />
+          <input className="search-button button button-outline" type="button" onClick={(e) => this.handleSearch()} value="search" />
         </div>
         {this.state.result.translation && this.state.result.word &&
           <Word translation={this.state.result.translation} word={this.state.result.word} />
