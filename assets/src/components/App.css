@@ -1,0 +1,9 @@
+.header-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header-hr {
+  margin-top: -1em;
+}
