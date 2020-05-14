@@ -77,3 +77,6 @@ config :shikche, Shikche.Repo,
   ssl: true,
   url: System.get_env("DATABASE_URL"),
   pool_size: 5
+
+config :shikche, Shikche.Token,
+  secret: System.get_env("TOKEN_SECRET")

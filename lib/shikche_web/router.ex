@@ -17,8 +17,8 @@ defmodule ShikcheWeb.Router do
   scope "/api/v1", ShikcheWeb do
     pipe_through :api
 
+    post "/login", LoginController, :login
     get "/languages/:name", LanguageController, :get
-
     # post "/translations", TranslationController, :insert
     get "/translations/:word", TranslationController, :get
     get "/*path", PageController, :not_found

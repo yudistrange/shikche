@@ -74,3 +74,6 @@ config :shikche, Shikche.Repo,
   hostname: "localhost",
   port: 47000,
   pool_size: 10
+
+config :shikche, Shikche.Token,
+  secret: "secret"
