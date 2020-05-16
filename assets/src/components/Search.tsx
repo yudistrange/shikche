@@ -9,23 +9,23 @@ const SearchFailed = () => (
   </div>
 )
 
+interface SearchResult { translation: string, word: string, metadata: {example: string}}
 interface SearchState {
   text: string,
-  result: { translation: string, word: string, example: string},
+  result: SearchResult[],
   searchFailed?: boolean,
 }
 
 export class Search extends React.Component<{}, SearchState> {
   state = {
     text: '',
-    result: {translation: '', word: '', example: ''},
+    result: [],
     searchFailed: false,
   }
 
   handleSearchInput(e: React.ChangeEvent<HTMLInputElement>) {
     const text = e.target.value;
-    this.setState({ text: text, searchFailed: false,
-      result: { translation: '', word: '', example: ''}});
+    this.setState({ text: text, searchFailed: false, result: []});
   }
 
   async handleSearch() {
@@ -34,16 +34,14 @@ export class Search extends React.Component<{}, SearchState> {
       this.setState({searchFailed: true})
 
     } else {
-      const result = await response.json()
+      const results = await response.json()
 
       this.setState((state, _props) => {
         return {
           text: state.text,
-          result: {
-            translation: result.translation,
-            word: result.word,
-            example: result.metadata.example,
-          },
+          result: results.map((r: SearchResult) => {
+            return {translation: r.translation, word: r.word, metadata: r.metadata}
+          }),
         }
       })
     }
@@ -56,9 +54,7 @@ export class Search extends React.Component<{}, SearchState> {
           <input className="search-bar" type="text" placeholder="word.." onChange={this.handleSearchInput.bind(this)} />
           <input className="search-button button button-outline" type="button" onClick={(e) => this.handleSearch()} value="search" />
         </div>
-        {this.state.result.translation && this.state.result.word &&
-          <Word translation={this.state.result.translation} word={this.state.result.word} example={this.state.result.example}/>
-        }
+        <Word translations={this.state.result.map((r: SearchResult) => {return {translation: r.translation, word: r.word, example: r.metadata.example}})} />
         {this.state.searchFailed === true && <SearchFailed />}
       </>
     )
