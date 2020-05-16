@@ -30,3 +30,10 @@
     width: 12em;
   }
 }
+
+.search-failure-message {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 2em;
+}
