@@ -24,18 +24,26 @@ export class Search extends React.Component<{}, SearchState> {
 
   handleSearchInput(e: React.ChangeEvent<HTMLInputElement>) {
     const text = e.target.value;
-    this.setState({ text: text, searchFailed: false });
+    this.setState({ text: text, searchFailed: false,
+      result: { translation: '', word: '', example: ''}});
   }
 
   async handleSearch() {
     const response = await searchBackend(this.state.text)
     if (!response.ok) {
       this.setState({searchFailed: true})
+
     } else {
       const result = await response.json()
+
       this.setState((state, _props) => {
         return {
-          text: state.text, result: result,
+          text: state.text,
+          result: {
+            translation: result.translation,
+            word: result.word,
+            example: result.metadata.example,
+          },
         }
       })
     }
@@ -49,7 +57,7 @@ export class Search extends React.Component<{}, SearchState> {
           <input className="search-button button button-outline" type="button" onClick={(e) => this.handleSearch()} value="search" />
         </div>
         {this.state.result.translation && this.state.result.word &&
-          <Word translation={this.state.result.translation} word={this.state.result.word} />
+          <Word translation={this.state.result.translation} word={this.state.result.word} example={this.state.result.example}/>
         }
         {this.state.searchFailed === true && <SearchFailed />}
       </>
