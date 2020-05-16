@@ -6,6 +6,7 @@ defmodule Shikche.Models.Translation do
   use Ecto.Schema
 
   import Ecto.Changeset
+  import Ecto.Query
 
   alias Shikche.Repo
   alias Shikche.Models.Translation
@@ -39,4 +40,16 @@ defmodule Shikche.Models.Translation do
   def delete(nil), do: nil
   def delete(%Translation{} = translation), do: Repo.delete(translation)
   def delete(word), do: word |> get() |> delete()
+
+  def fuzzy_get(word) do
+    word_regex = "%#{word}%"
+
+    query =
+      from(t in Translation,
+        where: ilike(t.word, ^word_regex) or ilike(t.translation, ^word_regex),
+        select: t
+      )
+
+    Repo.all(query)
+  end
 end

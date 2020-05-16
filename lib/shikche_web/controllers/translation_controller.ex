@@ -11,12 +11,17 @@ defmodule ShikcheWeb.TranslationController do
   end
 
   def get(conn, %{"word" => word}) do
-    case Translation.get(word) do
-      %Translation{} = translation ->
-        json(conn, Map.take(translation, [:id, :word, :translation, :metadata]))
-
-      _ ->
+    case Translation.fuzzy_get(word) do
+      [] ->
         conn |> put_status(404) |> json(%{reason: "Translation not found"})
+
+      translations ->
+        json(
+          conn,
+          Enum.map(translations, fn translation ->
+            Map.take(translation, [:id, :word, :translation, :metadata])
+          end)
+        )
     end
   end
 
