@@ -15,7 +15,7 @@ defmodule ShikcheWeb.TranslationController do
   def get(conn, %{"word" => word}) do
     case Translation.fuzzy_get(word) do
       [] ->
-        conn |> put_status(404) |> json(%{reason: "Translation not found"})
+        conn |> put_status(:not_found) |> json(%{reason: "Translation not found"})
 
       translations ->
         json(
@@ -39,14 +39,14 @@ defmodule ShikcheWeb.TranslationController do
             "Failed to add translation with changeset failure #{inspect(changeset.errors)}}"
           )
 
-          conn |> put_status(400) |> json(%{reason: "Bad request"})
+          conn |> put_status(:bad_request) |> json(%{reason: "Bad request"})
 
         otherwise ->
           Logger.error("Failed to add translation with error #{inspect(otherwise)}")
-          conn |> put_status(500) |> json(%{reason: "Internal Server Error"})
+          conn |> put_status(:internal_server_error) |> json(%{reason: "Internal Server Error"})
       end
     else
-      conn |> put_status(403) |> json(%{reason: "Authorization failed"})
+      conn |> put_status(:unauthorized) |> json(%{reason: "Authorization failed"})
     end
   end
 

@@ -14,7 +14,7 @@ defmodule ShikcheWeb.LanguageController do
         json(conn, Map.take(language, [:id, :name]))
 
       _ ->
-        conn |> put_status(404) |> json(%{reason: "Language not found"})
+        conn |> put_status(:not_found) |> json(%{reason: "Language not found"})
     end
   end
 end
