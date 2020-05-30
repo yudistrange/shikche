@@ -11,6 +11,7 @@ config :shikche, ShikcheWeb.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
+  auth_key: "authorization",
   watchers: [
     node: [
       "node_modules/webpack/bin/webpack.js",
