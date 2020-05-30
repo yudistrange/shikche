@@ -1,5 +1,7 @@
 defmodule ShikcheWeb.Router do
   use ShikcheWeb, :router
+  use Plug.ErrorHandler
+  require Logger
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -29,5 +31,10 @@ defmodule ShikcheWeb.Router do
 
     get "/", PageController, :index
     get "/*path", PageController, :not_found
+  end
+
+  def handle_errors(conn, %{kind: _kind, reason: _reason, stack: _stack} = err) do
+    err |> inspect |> Logger.error()
+    resp(conn, :internal_server_error, "Internal server error")
   end
 end
