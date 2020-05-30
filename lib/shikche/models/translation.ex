@@ -24,7 +24,7 @@ defmodule Shikche.Models.Translation do
     translation
     |> cast(attributes, [:word, :metadata, :translation, :language_id])
     |> validate_required([:word, :metadata, :translation])
-    |> unique_constraint(:word)
+    |> unique_constraint(:word, name: :translation_language_unique_constraint)
     |> foreign_key_constraint(:language_id)
   end
 
