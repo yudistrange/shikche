@@ -47,11 +47,17 @@ export class Search extends React.Component<{}, SearchState> {
     }
   }
 
+  async handleEnter(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === "Enter") {
+      this.handleSearch()
+    }
+  }
+
   render() {
     return (
       <>
         <div className="search-component row">
-          <input className="search-bar" type="text" placeholder="word.." onChange={this.handleSearchInput.bind(this)} />
+          <input className="search-bar" type="text" placeholder="word.." onChange={(e) => this.handleSearchInput(e)} onKeyDown={(e) => this.handleEnter(e)}/>
           <input className="search-button button button-outline" type="button" onClick={(e) => this.handleSearch()} value="search" />
         </div>
         <Word translations={this.state.result.map((r: SearchResult) => {return {translation: r.translation, word: r.word, example: r.metadata.example}})} />
