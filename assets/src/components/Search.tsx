@@ -1,4 +1,5 @@
 import React from 'react';
+import {debounce} from 'lodash';
 import {Word} from './Word';
 import {searchBackend} from '../api';
 import './Search.css'
@@ -23,15 +24,19 @@ export class Search extends React.Component<{}, SearchState> {
     searchFailed: false,
   }
 
-  handleSearchInput(e: React.ChangeEvent<HTMLInputElement>) {
+  debouncedSearch = debounce(this.handleSearch, 500)
+
+  async handleSearchInput(e: React.ChangeEvent<HTMLInputElement>) {
     const text = e.target.value;
+    this.debouncedSearch(text)
     this.setState({ text: text, searchFailed: false, result: []});
   }
 
-  async handleSearch() {
-    const response = await searchBackend(this.state.text)
+  async handleSearch(text: string) {
+    const response = await searchBackend(text)
+
     if (!response.ok) {
-      this.setState({searchFailed: true})
+      this.setState({ searchFailed: true })
 
     } else {
       const results = await response.json()
@@ -40,16 +45,10 @@ export class Search extends React.Component<{}, SearchState> {
         return {
           text: state.text,
           result: results.map((r: SearchResult) => {
-            return {translation: r.translation, word: r.word, metadata: r.metadata}
+            return { translation: r.translation, word: r.word, metadata: r.metadata }
           }),
         }
       })
-    }
-  }
-
-  async handleEnter(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "Enter") {
-      this.handleSearch()
     }
   }
 
@@ -57,8 +56,7 @@ export class Search extends React.Component<{}, SearchState> {
     return (
       <>
         <div className="search-component row">
-          <input className="search-bar" type="text" placeholder="word.." onChange={(e) => this.handleSearchInput(e)} onKeyDown={(e) => this.handleEnter(e)}/>
-          <input className="search-button button button-outline" type="button" onClick={(e) => this.handleSearch()} value="search" />
+          <input className="search-bar" type="text" placeholder="word.." onChange={(e) => this.handleSearchInput(e)}/>
         </div>
         <Word translations={this.state.result.map((r: SearchResult) => {return {translation: r.translation, word: r.word, example: r.metadata.example}})} />
         {this.state.searchFailed === true && <SearchFailed />}
